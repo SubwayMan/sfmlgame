@@ -3,7 +3,7 @@ CC = clang++
 CFLAGS = -Wall -g
 LFLAGS =  -lsfml-graphics -lsfml-window -lsfml-system
 
-output: main.o
+./bin/game: main.o
 	$(CC) main.o -o ./bin/game $(LFLAGS)
 
 main.o: main.cpp
