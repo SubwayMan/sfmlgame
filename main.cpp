@@ -9,6 +9,7 @@
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include "Player.h"
 #include "GameObject.h"
 
 class Ball {
@@ -38,7 +39,7 @@ int main() {
     int xVel = 3;
     int yVel = 3;
     float brad = b.C.getRadius();
-    GameObject knux(20, 20, 100, 100, "./assets/knuckles.png");
+    Player knux(20, 20, 100, 100, "./assets/knuckles.png");
 
     knux.scaleToSize();
 

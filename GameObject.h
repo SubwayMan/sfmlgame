@@ -26,6 +26,3 @@ class GameObject {
         sf::Vector2u textureSize;
 };
 
-class Player: GameObject {
-
-};
