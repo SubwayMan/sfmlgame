@@ -7,6 +7,7 @@
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include "GameObject.h"
 
 class Ball {
     public:
