@@ -1,12 +1,5 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <SFML/Window/Event.hpp>
-#include <string>
-#include <iostream>
-#include <vector>
 
 class BoundingBox {
     public:
