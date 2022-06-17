@@ -23,6 +23,7 @@ int main() {
     int yVel = 3;
     Player knux(20, 20, 100, 100, "./assets/knuckles.png");
     std::vector<GameObject*> gameObjects;
+    sf::Vector2f mv(3, 3);
     gameObjects.push_back(&knux);
 
     knux.scaleToSize();
@@ -34,10 +35,11 @@ int main() {
         }
         window.clear(sf::Color::Black);
         // display code here
-        window.draw(knux.sprite);
+        knux.move(sf::Vector2f(3, 3));
 
         for (auto obj: gameObjects) {
             obj->loop();
+            window.draw(obj->sprite);
         }
 
 

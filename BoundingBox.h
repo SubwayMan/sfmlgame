@@ -6,6 +6,6 @@ class BoundingBox {
         sf::Vector2f position;
         double width, height;
         BoundingBox(double x, double y, double w, double h);
-        void moveTo(double x, double y);
-        void move(double x, double y);
+        void moveTo(const sf::Vector2f &);
+        void move(const sf::Vector2f &);
 };

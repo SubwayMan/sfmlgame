@@ -2,5 +2,8 @@
 
 class Player: public GameObject {
     using GameObject::GameObject;
+    public:
+        void loop() override;
 
 };
+

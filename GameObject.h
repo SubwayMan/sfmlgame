@@ -19,7 +19,10 @@ class GameObject {
         ~GameObject();
         // Scale the sprite to the object's bounding box
         void scaleToSize();
-        void loop();
+        virtual void loop() = 0;
+        void setPosition(const sf::Vector2f &);
+        void move(const sf::Vector2f &);
+
     protected:
         // Texture must exist so long as the sprite intends to refer to it
         sf::Texture texture;
