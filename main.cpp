@@ -12,34 +12,18 @@
 #include "Player.h"
 #include "GameObject.h"
 
-class Ball {
-    public:
-        sf::CircleShape C;
-        Ball(int rad, int x, int y, int r, int g, int b) {
-            C.setRadius(rad);
-            C.setPosition(x, y);
-            C.setFillColor(sf::Color(r, g, b));
-        }
-        void move(float x, float y) {
-            sf::Vector2f mv(x, y);
-            C.setPosition(C.getPosition() + mv);
-        }
-
-        void update();
-};
-
 int main() {
     // Ball ball(50, 100, 30, 250, 0, 0);
     sf::Event event;
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Test");
     window.setFramerateLimit(60);
-    Ball b(30, 50, 50, 121, 54, 12);
 
     int xVel = 3;
     int yVel = 3;
-    float brad = b.C.getRadius();
     Player knux(20, 20, 100, 100, "./assets/knuckles.png");
+    std::vector<GameObject*> gameObjects;
+    gameObjects.push_back(&knux);
 
     knux.scaleToSize();
 
@@ -50,16 +34,12 @@ int main() {
         }
         window.clear(sf::Color::Black);
         // display code here
-        window.draw(b.C);
         window.draw(knux.sprite);
 
-        b.move(xVel, yVel);
-        sf::Vector2f bpos = b.C.getPosition();
-        if (bpos.x + 2*brad > 800) xVel = abs(xVel) * -1;
-        if (bpos.y + 2*brad> 600) yVel = abs(yVel) * -1;
-        if (bpos.x <= 0) xVel = abs(xVel);
-        if (bpos.y <= 0) yVel = abs(yVel);
-    
+        for (auto obj: gameObjects) {
+            obj->loop();
+        }
+
 
         window.display();
     }

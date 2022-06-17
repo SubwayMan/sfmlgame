@@ -19,7 +19,7 @@ class GameObject {
         ~GameObject();
         // Scale the sprite to the object's bounding box
         void scaleToSize();
-        void loop(std::vector<sf::Event> &e);
+        void loop();
     protected:
         // Texture must exist so long as the sprite intends to refer to it
         sf::Texture texture;
