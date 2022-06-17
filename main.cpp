@@ -1,3 +1,5 @@
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <iostream>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Color.hpp>
@@ -36,7 +38,13 @@ int main() {
     int xVel = 3;
     int yVel = 3;
     float brad = b.C.getRadius();
-    GameObject knux(20, 20, 100, 100, "assets/knuckles.png");
+    GameObject knux(20, 20, 100, 100, "k.png");
+    sf::Texture t;
+    t.loadFromFile("k.png");
+    sf::Sprite s;
+    s.setTexture(t);
+
+    knux.scaleToSize();
 
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
@@ -47,6 +55,7 @@ int main() {
         // display code here
         window.draw(b.C);
         window.draw(knux.sprite);
+        window.draw(s);
 
         b.move(xVel, yVel);
         sf::Vector2f bpos = b.C.getPosition();

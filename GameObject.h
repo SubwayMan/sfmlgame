@@ -4,6 +4,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <string>
+#include <iostream>
 
 class BoundingBox {
     public:
@@ -41,17 +42,25 @@ class GameObject {
         // Scale the sprite to the object's bounding box
         void scaleToSize();
     private:
+        // Texture must exist so long as the sprite intends to refer to it
+        sf::Texture texture;
         sf::Vector2u textureSize;
 };
 
 GameObject::GameObject(double x, double y, double w, double h, std::string texture) {
-    sf::Texture t;
-    t.loadFromFile(texture);
-    this->sprite.setTexture(t);
+    this->texture.loadFromFile(texture);
+    this->textureSize = this->texture.getSize();
+    this->sprite.setTexture(this->texture);
     this->sprite.setPosition(x, y);
     this->bb = new BoundingBox(x, y, w, h);
 }
 
 GameObject::~GameObject() {
-    delete[] this->bb;
+    delete this->bb;
+}
+
+void GameObject::scaleToSize() {
+    double scaleX = this->bb->width/this->textureSize.x;
+    double scaleY = this->bb->height/this->textureSize.y;
+    this->sprite.setScale(scaleX, scaleY);
 }
