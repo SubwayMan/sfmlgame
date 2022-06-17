@@ -36,6 +36,7 @@ int main() {
     int xVel = 3;
     int yVel = 3;
     float brad = b.C.getRadius();
+    GameObject knux(20, 20, 100, 100, "assets/knuckles.png");
 
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
@@ -45,6 +46,7 @@ int main() {
         window.clear(sf::Color::Black);
         // display code here
         window.draw(b.C);
+        window.draw(knux.sprite);
 
         b.move(xVel, yVel);
         sf::Vector2f bpos = b.C.getPosition();
