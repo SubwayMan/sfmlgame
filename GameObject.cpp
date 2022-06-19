@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "BoundingBox.h"
+#include "functions.h"
 #include <SFML/System/Vector2.hpp>
 
 GameObject::GameObject(double x, double y, double w, double h, std::string texture) {
@@ -34,3 +35,11 @@ void GameObject::move(const sf::Vector2f &v) {
     this->sprite.setPosition(this->position + v);
 }
 
+void GameObject::markAsCollider(std::vector<GameObject *> &objs) {
+    this->isCollider = true;
+    for (GameObject *e: objs) {
+        if (getCollision(*this->bb, *e->bb)) {
+            this->colliders.insert(e);
+        }
+    }
+}

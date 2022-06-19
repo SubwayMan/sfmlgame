@@ -8,11 +8,14 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <set>
 
 class GameObject {
     public:
         sf::Vector2f position;
         sf::Sprite sprite;
+        bool isCollider;
+        std::set<GameObject*> colliders;
         BoundingBox *bb;
         
         GameObject(double x, double y, double w, double h, std::string texture);
@@ -22,6 +25,7 @@ class GameObject {
         virtual void loop() = 0;
         void setPosition(const sf::Vector2f &);
         void move(const sf::Vector2f &);
+        void markAsCollider(std::vector<GameObject*> &objs);
 
     protected:
         // Texture must exist so long as the sprite intends to refer to it

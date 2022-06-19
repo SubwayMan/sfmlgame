@@ -1,4 +1,4 @@
-#include "BoundingBox.h"
+#include "functions.h"
 #include "GameObject.h"
 
 bool getCollision(BoundingBox &a, BoundingBox &b) {
