@@ -16,7 +16,9 @@ int main() {
     // Ball ball(50, 100, 30, 250, 0, 0);
     sf::Event event;
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Test");
+    sf::VideoMode vm = sf::VideoMode::getFullscreenModes()[0];
+
+    sf::RenderWindow window(vm, "SFML Test");
     window.setFramerateLimit(60);
 
     int xVel = 3;
