@@ -1,6 +1,5 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
-#include <iostream>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -8,9 +7,10 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <cmath>
-#include "Player.h"
-#include "GameObject.h"
+#include "headers/Player.h"
+#include "headers/GameObject.h"
 
 int main() {
     // Ball ball(50, 100, 30, 250, 0, 0);

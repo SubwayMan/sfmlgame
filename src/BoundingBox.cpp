@@ -1,4 +1,4 @@
-#include "BoundingBox.h"
+#include "headers/BoundingBox.h"
 #include <SFML/System/Vector2.hpp>
 
 void BoundingBox::move(const sf::Vector2f &v) {

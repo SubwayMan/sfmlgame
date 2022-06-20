@@ -1,6 +1,6 @@
-#include "GameObject.h"
-#include "BoundingBox.h"
-#include "functions.h"
+#include "headers/GameObject.h"
+#include "headers/BoundingBox.h"
+#include "headers/functions.h"
 #include <SFML/System/Vector2.hpp>
 
 GameObject::GameObject(double x, double y, double w, double h, std::string texture) {

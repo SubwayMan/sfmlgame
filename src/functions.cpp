@@ -1,5 +1,5 @@
-#include "functions.h"
-#include "GameObject.h"
+#include "headers/functions.h"
+#include "headers/GameObject.h"
 
 bool getCollision(BoundingBox &a, BoundingBox &b) {
     return !(a.position.x >= b.position.x + b.width ||

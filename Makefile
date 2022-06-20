@@ -1,19 +1,71 @@
-CXX = clang++
+# This makefile was stolen from: 
+# https://stackoverflow.com/questions/5178125/how-to-place-object-files-in-separate-subdirectory
 
-CFLAGS = -Wall -g
-LFLAGS =  -lsfml-graphics -lsfml-window -lsfml-system
-OBJECTS = main.o BoundingBox.o GameObject.o Player.o functions.o
+#Compiler and Linker
+CC			:= clang++
 
-./bin/game: $(OBJECTS)
-	$(CXX) $(OBJECTS) -o ./bin/game $(LFLAGS)
+#The Target Binary Program
+TARGET		:= game
 
-GameObject.o: GameObject.h
+#The Directories, Source, Includes, Objects, Binary and Resources
+SRCDIR		:= src
+INCDIR		:= inc
+BUILDDIR	:= obj
+TARGETDIR	:= bin
+SRCEXT		:= cpp
+DEPEXT		:= d
+OBJEXT		:= o
 
-BoundingBox.o: BoundingBox.h
+#Flags, Libraries and Includes
+CFLAGS		:= -fopenmp -Wall -g
+LIB			:= -fopenmp -lsfml-graphics -lsfml-window -lsfml-system
+INC			:= -I$(INCDIR) -I/usr/local/include
+INCDEP		:= -I$(INCDIR)
 
-Player.o: Player.h
+#---------------------------------------------------------------------------------
+#DO NOT EDIT BELOW THIS LINE
+#---------------------------------------------------------------------------------
+SOURCES		:= $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJECTS		:= $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
 
-functions.o: functions.h
+#Defauilt Make
+all: resources $(TARGET)
 
+#Remake
+remake: cleaner all
+
+#Copy Resources from Resources Directory to Target Directory
+resources: directories
+
+#Make the Directories
+directories:
+	@mkdir -p $(TARGETDIR)
+	@mkdir -p $(BUILDDIR)
+
+#Clean only Objecst
 clean:
-	rm *.o ./bin/*
+	@$(RM) -rf $(BUILDDIR)
+
+#Full Clean, Object/ss and Binaries
+cleaner: clean
+	@$(RM) -rf $(TARGETDIR)
+
+#Pull in dependency info for *existing* .o files
+-include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
+
+#Link
+$(TARGET): $(OBJECTS)
+	$(CC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
+
+#Compile
+$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
+	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
+	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
+	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
+	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+
+#Non-File Targets
+.PHONY: all remake clean cleaner resources
