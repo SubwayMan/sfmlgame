@@ -29,19 +29,33 @@ void GameObject::setPosition(const sf::Vector2f &pos) {
     this->position = pos;
     this->bb->moveTo(pos);
     this->sprite.setPosition(pos);
+    this->updateColliders();
 }
 
 void GameObject::move(const sf::Vector2f &v) {
     this->position += v;
     this->bb->move(v);
     this->sprite.setPosition(this->position + v);
+    this->updateColliders();
 }
 
-void GameObject::markAsCollider(std::vector<GameObject *> &objs) {
+void GameObject::markAsCollider() {
     this->isCollider = true;
-    for (GameObject *e: objs) {
+    this->updateColliders();
+}
+
+void GameObject::updateColliders() {
+    // update colliding lists of all previous colliders
+    for (GameObject *e: this->colliders) {
+        e->colliders.erase(this);
+    }
+    this->colliders.clear();
+
+    // add all new colliders from game manager
+    for (GameObject *e: this->GM->colliders) {
         if (getCollision(*this->bb, *e->bb)) {
             this->colliders.insert(e);
+            e->colliders.insert(this);
         }
     }
 }

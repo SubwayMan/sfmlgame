@@ -9,8 +9,10 @@ GameManager::GameManager(sf::Window *w) {
 
 void GameManager::addGameObject(GameObject* g, bool isCollider) {
     this->objectList.insert(g);
-    if (isCollider) 
+    if (isCollider) {
         this->colliders.insert(g);
+        g->markAsCollider();
+    }
 }
 
 

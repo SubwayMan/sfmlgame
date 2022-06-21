@@ -31,7 +31,8 @@ class GameObject {
         virtual void loop() = 0;
         void setPosition(const sf::Vector2f &);
         void move(const sf::Vector2f &);
-        void markAsCollider(std::vector<GameObject*> &objs);
+        void markAsCollider();
+        void updateColliders();
 
     protected:
         // Texture must exist so long as the sprite intends to refer to it
