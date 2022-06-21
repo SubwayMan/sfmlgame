@@ -25,9 +25,12 @@ int main() {
 
     GameManager GM(&window);
     Player knux(20, 20, 100, 100, "./assets/knuckles.png", &GM);
+    Blank bl(500, 500, 40, 100, "./assets/portalA.png", &GM);
     GM.addGameObject(&knux, true);
+    GM.addGameObject(&bl, true);
 
     knux.scaleToSize();
+    bl.scaleToSize();
 
     while (window.isOpen()) {
         while (window.pollEvent(event)) {

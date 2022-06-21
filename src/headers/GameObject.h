@@ -47,7 +47,14 @@ class Portal: public GameObject {
         Player *player;
         Portal(Player *p);
 
-    private:
+    protected:
         Portal* alt=0;
 
+};
+
+class Blank: public GameObject {
+    using GameObject::GameObject;
+    public:
+        void loop() override;
+        Player *player;
 };

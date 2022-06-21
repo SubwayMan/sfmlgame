@@ -53,9 +53,18 @@ void GameObject::updateColliders() {
 
     // add all new colliders from game manager
     for (GameObject *e: this->GM->colliders) {
+        if (this == e) continue;
         if (getCollision(*this->bb, *e->bb)) {
             this->colliders.insert(e);
             e->colliders.insert(this);
         }
     }
 }
+
+void Blank::loop() {
+    if (!this->colliders.empty()) {
+        sf::Vector2f v(3, 3);
+        this->move(v);
+    }
+}
+

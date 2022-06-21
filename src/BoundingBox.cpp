@@ -6,7 +6,7 @@ void BoundingBox::move(const sf::Vector2f &v) {
 }
 
 void BoundingBox::moveTo(const sf::Vector2f &v) {
-    this->position + v;
+    this->position = v;
 }
 
 BoundingBox::BoundingBox(double x, double y, double w, double h) {
