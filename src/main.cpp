@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include "headers/GameManager.h"
 #include "headers/Player.h"
 #include "headers/GameObject.h"
 
@@ -21,11 +22,10 @@ int main() {
     sf::RenderWindow window(vm, "SFML Test");
     window.setFramerateLimit(60);
 
-    int xVel = 3;
-    int yVel = 3;
-    Player knux(20, 20, 100, 100, "./assets/knuckles.png");
-    std::vector<GameObject*> gameObjects;
-    gameObjects.push_back(&knux);
+
+    GameManager GM(&window);
+    Player knux(20, 20, 100, 100, "./assets/knuckles.png", &GM);
+    GM.addGameObject(&knux, true);
 
     knux.scaleToSize();
 
@@ -37,7 +37,7 @@ int main() {
         window.clear(sf::Color::Black);
         // display code here
 
-        for (auto obj: gameObjects) {
+        for (auto obj: GM.objectList) {
             obj->loop();
             window.draw(obj->sprite);
         }

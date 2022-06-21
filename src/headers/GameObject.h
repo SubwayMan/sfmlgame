@@ -10,6 +10,9 @@
 #include <vector>
 #include <set>
 
+//forward declaration
+class GameManager;
+
 class GameObject {
     public:
         sf::Vector2f position;
@@ -17,8 +20,10 @@ class GameObject {
         bool isCollider;
         std::set<GameObject*> colliders;
         BoundingBox *bb;
+        GameManager *GM;
+
         
-        GameObject(double x, double y, double w, double h, std::string texture);
+        GameObject(double x, double y, double w, double h, std::string texture, GameManager *GM);
         ~GameObject();
         // Scale the sprite to the object's bounding box
         void scaleToSize();
