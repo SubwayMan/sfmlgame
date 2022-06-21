@@ -12,6 +12,7 @@
 
 //forward declaration
 class GameManager;
+class Player;
 
 class GameObject {
     public:
@@ -38,3 +39,14 @@ class GameObject {
         sf::Vector2u textureSize;
 };
 
+class Portal: public GameObject {
+    using GameObject::GameObject;
+    public:
+        void loop() override;
+        Player *player;
+        Portal(Player *p);
+
+    private:
+        Portal* alt=0;
+
+};
