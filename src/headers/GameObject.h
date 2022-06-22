@@ -24,13 +24,14 @@ class GameObject {
         GameManager *GM;
 
         
-        GameObject(double x, double y, double w, double h, std::string texture, GameManager *GM);
+        GameObject(double x, double y, double w, double h, GameManager *GM);
         ~GameObject();
         // Scale the sprite to the object's bounding box
         void scaleToSize();
         virtual void loop() = 0;
         void setPosition(const sf::Vector2f &);
         void move(const sf::Vector2f &);
+        void setTexture(const std::string &);
         void markAsCollider();
         void updateColliders();
 

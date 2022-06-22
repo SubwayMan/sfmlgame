@@ -24,8 +24,9 @@ int main() {
 
 
     GameManager GM(&window);
-    Player knux(20, 20, 100, 100, "./assets/knuckles.png", &GM);
-    Blank bl(500, 500, 40, 100, "./assets/portalA.png", &GM);
+    Player knux(20, 20, 100, 100, &GM);
+    Blank bl(500, 500, 100, 100, &GM);
+    bl.setTexture("assets/placeholder.png");
     GM.addGameObject(&knux, true);
     GM.addGameObject(&bl, true);
 

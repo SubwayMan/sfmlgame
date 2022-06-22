@@ -3,11 +3,9 @@
 #include "headers/GameManager.h"
 #include "headers/functions.h"
 #include <SFML/System/Vector2.hpp>
+#include <string>
 
-GameObject::GameObject(double x, double y, double w, double h, std::string texture, GameManager* GM) {
-    this->texture.loadFromFile(texture);
-    this->textureSize = this->texture.getSize();
-    this->sprite.setTexture(this->texture);
+GameObject::GameObject(double x, double y, double w, double h, GameManager* GM) {
     this->sprite.setPosition(x, y);
     this->bb = new BoundingBox(x, y, w, h);
     this->position.x = x;
@@ -17,6 +15,12 @@ GameObject::GameObject(double x, double y, double w, double h, std::string textu
 
 GameObject::~GameObject() {
     delete this->bb;
+}
+
+void GameObject::setTexture(const std::string &texture) {
+    this->texture.loadFromFile(texture);
+    this->textureSize = this->texture.getSize();
+    this->sprite.setTexture(this->texture);
 }
 
 void GameObject::scaleToSize() {
